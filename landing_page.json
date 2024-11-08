@@ -1,0 +1,95 @@
+{
+    "name": "Absence Management Pro",
+    "logo": {
+        "Type": "Logo",
+        "name": "Company Logo",
+        "description": "The official logo of Absence Management Pro, featuring a stylized clock and calendar symbol."
+    },
+    "sections": [
+        {
+            "title": "Revolutionize Your Workforce Management",
+            "subtitle": "Simplified Absence Tracking & Reporting",
+            "name": "hero",
+            "label": "Home",
+            "content": "Effortlessly manage employee absences and ensure seamless operations with our cutting-edge absence management solutions. Keep your team on track and your business thriving.\n\n**Get Started Today!**",
+            "order": 1,
+            "Type": "Hero",
+            "images": [
+                {
+                    "Type": "Hero",
+                    "name": "Header Image",
+                    "description": "An image of a calendar with red circled dates representing absences."
+                }
+            ]
+        },
+        {
+            "title": "About Us",
+            "subtitle": "Our Mission and Vision",
+            "name": "about",
+            "label": "About",
+            "content": "At **Absence Management Pro**, our mission is to transform the way businesses handle employee absences. We aim to minimize disruptions and enhance productivity by providing intuitive solutions that are easy to implement and use.\n\n*Founded in 2010, we have helped over 10,000 businesses worldwide streamline their absence tracking, making workforce management a seamless experience.*",
+            "order": 2,
+            "Type": "About",
+            "images": [
+                {
+                    "Type": "Background",
+                    "name": "About Background",
+                    "description": "A blurred image of an office full of diverse employees."
+                }
+            ]
+        },
+        {
+            "title": "Our Services",
+            "subtitle": "Designed for Efficiency & Accuracy",
+            "name": "services",
+            "label": "Services",
+            "content": "Our range of services is tailored to meet the diverse needs of modern workplaces:\n\n- **Automated Absence Tracking:** Keep tabs on who's in and who's out without manual checks.\n- **Comprehensive Reporting:** Make informed decisions with detailed reports.\n- **Seamless Integrations:** Easily integrate with other HR and payroll systems.\n- **Employee Self-Service Portal:** Empower your employees with self-service options for leave requests.\n\nJoin the ranks of satisfied clients who have optimized their operations with our innovative solutions.",
+            "order": 3,
+            "Type": "Services",
+            "images": [
+                {
+                    "Type": "Infographic",
+                    "name": "Services Infographic",
+                    "description": "Visual representation of services offered by the absence management solution."
+                }
+            ]
+        },
+        {
+            "title": "Client Testimonials",
+            "subtitle": "What Our Clients Say",
+            "name": "testimonials",
+            "label": "Testimonials",
+            "content": "Hear from some of our satisfied clients:\n\n\"Absence Management Pro has transformed the way we handle absences, making us more efficient than ever.\" \u2014 *Mark J., HR Manager*\n\n\"The easy integration with our existing systems saved us time and resources.\" \u2014 *Stephanie A., Operations Head*",
+            "order": 4,
+            "Type": "Testimonials",
+            "images": [
+                {
+                    "Type": "Testimonial",
+                    "name": "Testimonial Image 1",
+                    "description": "Picture of a smiling client, Mark."
+                },
+                {
+                    "Type": "Testimonial",
+                    "name": "Testimonial Image 2",
+                    "description": "Picture of a satisfied client, Stephanie."
+                }
+            ]
+        },
+        {
+            "title": "Contact Us",
+            "subtitle": "We\u2019re Here to Help",
+            "name": "contact",
+            "label": "Contact",
+            "content": "Reach out to us with any questions or to schedule a demo of our solution:\n\n- **Email:** support@absencemanagementpro.com  \n- **Phone:** +1-800-123-4567  \n- **Address:** 123 Main St, Business City, BC 12345\n\n*We look forward to helping you achieve a seamless workforce management experience.*",
+            "order": 5,
+            "Type": "Contact",
+            "images": [
+                {
+                    "Type": "Map",
+                    "name": "Office Location",
+                    "description": "Map displaying the location of Absence Management Pro's headquarters."
+                }
+            ]
+        }
+    ]
+}

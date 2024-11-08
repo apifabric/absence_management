@@ -1,0 +1,637 @@
+<div class="container">
+<o-form-container breadcrumb="yes" breadcrumb-label-columns="first_name" breadcrumb-separator=", " class="fill-form">
+      <o-form #form attr="Employee_form_edit" 
+        service="Employee" 
+        entity="Employee" 
+        fxLayout="column" 
+        show-header="yes" 
+        header-actions="R;I;U;D"
+        #oDetailForm keys="id" 
+        keys-sql-types="INTEGER" 
+        show-header-navigation="yes"
+        (onDataLoaded)="onDataLoaded($event)">
+
+  <o-row attr="row1" layout-align="start stretch">
+    <div fxLayout="row wrap" fxLayoutAlign="start start" fxFlex fxLayoutGap="14px">
+      
+      <o-text-input #first_name attr="first_name" label=" first_name*" enabled="yes" required="yes" fxFlex="20%" class="form-field"></o-text-input>
+      
+      <o-text-input #last_name attr="last_name" label="last_name" enabled="yes" required="yes" fxFlex="20%" class="form-field"></o-text-input>
+      
+      <o-text-input #email attr="email" label="email" enabled="yes" required="yes" fxFlex="20%" class="form-field"></o-text-input>
+      
+      <o-date-input #hire_date attr="hire_date" type="timestamp" label="hire_date" editable="no" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+      
+      <o-integer-input #id attr="id" label="id" type="integer" editable="no" required="no" ></o-integer-input>
+      
+    </div>
+  </o-row>
+      
+      <mat-tab-group fxFill>
+        
+        <mat-tab label="ATTENDANCE-employee_id">
+    <div layout-padding>
+      <o-table 
+        attr="AttendanceTable" 
+        service="Attendance" 
+        entity="Attendance" 
+        keys="id"
+        parent-keys="employee_id:id"
+        columns="id;employee_id;date;status"  
+        horizontal-scroll="yes"
+        detail-form-route="Attendance" 
+        edit-form-route="Attendance"
+        visible-columns="id;employee_id;date;status"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="employee_id" title="employee_id">
+    <o-table-cell-renderer-service attr="employee_id" 
+        service="Employee" entity="EmployeeType" columns="id;first_name"
+        parent-keys="id:employee_id"
+        value-column="first_name" keys="employee_id"
+        visible-columns="first_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-date-input #date attr="date" type="timestamp" label="date" editable="no" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+        
+          <o-table-column #status attr="status" title="status" editable="no" required="yes" content-align="left"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="EMPLOYEEBENEFIT-employee_id">
+    <div layout-padding>
+      <o-table 
+        attr="EmployeeBenefitTable" 
+        service="EmployeeBenefit" 
+        entity="EmployeeBenefit" 
+        keys="id"
+        parent-keys="employee_id:id"
+        columns="description;employee_id;benefit_type;id"  
+        horizontal-scroll="yes"
+        detail-form-route="EmployeeBenefit" 
+        edit-form-route="EmployeeBenefit"
+        visible-columns="description;employee_id;benefit_type;id"  
+        sort-columns="description" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #description attr="description" title=" description*" editable="no" required="no" content-align="left"></o-table-column>
+        
+          <o-table-column attr="employee_id" title="employee_id">
+    <o-table-cell-renderer-service attr="employee_id" 
+        service="Employee" entity="EmployeeType" columns="id;first_name"
+        parent-keys="id:employee_id"
+        value-column="first_name" keys="employee_id"
+        visible-columns="first_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column #benefit_type attr="benefit_type" title="benefit_type" editable="no" required="yes" content-align="left"></o-table-column>
+        
+          <o-table-column #id attr="id" title="id" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="EMPLOYEELOCATION-employee_id">
+    <div layout-padding>
+      <o-table 
+        attr="EmployeeLocationTable" 
+        service="EmployeeLocation" 
+        entity="EmployeeLocation" 
+        keys="id"
+        parent-keys="employee_id:id"
+        columns="id;employee_id;location_id"  
+        horizontal-scroll="yes"
+        detail-form-route="EmployeeLocation" 
+        edit-form-route="EmployeeLocation"
+        visible-columns="id;employee_id;location_id"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="employee_id" title="employee_id">
+    <o-table-cell-renderer-service attr="employee_id" 
+        service="Employee" entity="EmployeeType" columns="id;first_name"
+        parent-keys="id:employee_id"
+        value-column="first_name" keys="employee_id"
+        visible-columns="first_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column attr="location_id" title="location_id">
+    <o-table-cell-renderer-service attr="location_id" 
+        service="Location" entity="LocationType" columns="id;name"
+        parent-keys="id:location_id"
+        value-column="name" keys="location_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="EMPLOYEEPROJECT-employee_id">
+    <div layout-padding>
+      <o-table 
+        attr="EmployeeProjectTable" 
+        service="EmployeeProject" 
+        entity="EmployeeProject" 
+        keys="id"
+        parent-keys="employee_id:id"
+        columns="id;employee_id;project_id"  
+        horizontal-scroll="yes"
+        detail-form-route="EmployeeProject" 
+        edit-form-route="EmployeeProject"
+        visible-columns="id;employee_id;project_id"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="employee_id" title="employee_id">
+    <o-table-cell-renderer-service attr="employee_id" 
+        service="Employee" entity="EmployeeType" columns="id;first_name"
+        parent-keys="id:employee_id"
+        value-column="first_name" keys="employee_id"
+        visible-columns="first_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column attr="project_id" title="project_id">
+    <o-table-cell-renderer-service attr="project_id" 
+        service="Project" entity="ProjectType" columns="id;name"
+        parent-keys="id:project_id"
+        value-column="name" keys="project_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="EMPLOYEESHIFT-employee_id">
+    <div layout-padding>
+      <o-table 
+        attr="EmployeeShiftTable" 
+        service="EmployeeShift" 
+        entity="EmployeeShift" 
+        keys="id"
+        parent-keys="employee_id:id"
+        columns="id;employee_id;shift_id"  
+        horizontal-scroll="yes"
+        detail-form-route="EmployeeShift" 
+        edit-form-route="EmployeeShift"
+        visible-columns="id;employee_id;shift_id"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="employee_id" title="employee_id">
+    <o-table-cell-renderer-service attr="employee_id" 
+        service="Employee" entity="EmployeeType" columns="id;first_name"
+        parent-keys="id:employee_id"
+        value-column="first_name" keys="employee_id"
+        visible-columns="first_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column attr="shift_id" title="shift_id">
+    <o-table-cell-renderer-service attr="shift_id" 
+        service="Shift" entity="ShiftType" columns="id;shift_name"
+        parent-keys="id:shift_id"
+        value-column="shift_name" keys="shift_id"
+        visible-columns="shift_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="EMPLOYEETEAM-employee_id">
+    <div layout-padding>
+      <o-table 
+        attr="EmployeeTeamTable" 
+        service="EmployeeTeam" 
+        entity="EmployeeTeam" 
+        keys="id"
+        parent-keys="employee_id:id"
+        columns="id;employee_id;team_id"  
+        horizontal-scroll="yes"
+        detail-form-route="EmployeeTeam" 
+        edit-form-route="EmployeeTeam"
+        visible-columns="id;employee_id;team_id"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="employee_id" title="employee_id">
+    <o-table-cell-renderer-service attr="employee_id" 
+        service="Employee" entity="EmployeeType" columns="id;first_name"
+        parent-keys="id:employee_id"
+        value-column="first_name" keys="employee_id"
+        visible-columns="first_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column attr="team_id" title="team_id">
+    <o-table-cell-renderer-service attr="team_id" 
+        service="Team" entity="TeamType" columns="id;name"
+        parent-keys="id:team_id"
+        value-column="name" keys="team_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="EMPLOYEETRAINING-employee_id">
+    <div layout-padding>
+      <o-table 
+        attr="EmployeeTrainingTable" 
+        service="EmployeeTraining" 
+        entity="EmployeeTraining" 
+        keys="id"
+        parent-keys="employee_id:id"
+        columns="id;employee_id;training_program_id"  
+        horizontal-scroll="yes"
+        detail-form-route="EmployeeTraining" 
+        edit-form-route="EmployeeTraining"
+        visible-columns="id;employee_id;training_program_id"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="employee_id" title="employee_id">
+    <o-table-cell-renderer-service attr="employee_id" 
+        service="Employee" entity="EmployeeType" columns="id;first_name"
+        parent-keys="id:employee_id"
+        value-column="first_name" keys="employee_id"
+        visible-columns="first_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column attr="training_program_id" title="training_program_id">
+    <o-table-cell-renderer-service attr="training_program_id" 
+        service="TrainingProgram" entity="TrainingProgramType" columns="id;name"
+        parent-keys="id:training_program_id"
+        value-column="name" keys="training_program_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="EQUIPMENTASSIGNMENT-employee_id">
+    <div layout-padding>
+      <o-table 
+        attr="EquipmentAssignmentTable" 
+        service="EquipmentAssignment" 
+        entity="EquipmentAssignment" 
+        keys="id"
+        parent-keys="employee_id:id"
+        columns="equipment_name;employee_id;assignment_date;id"  
+        horizontal-scroll="yes"
+        detail-form-route="EquipmentAssignment" 
+        edit-form-route="EquipmentAssignment"
+        visible-columns="equipment_name;employee_id;assignment_date;id"  
+        sort-columns="equipment_name" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #equipment_name attr="equipment_name" title=" equipment_name*" editable="no" required="yes" content-align="left"></o-table-column>
+        
+          <o-table-column attr="employee_id" title="employee_id">
+    <o-table-cell-renderer-service attr="employee_id" 
+        service="Employee" entity="EmployeeType" columns="id;first_name"
+        parent-keys="id:employee_id"
+        value-column="first_name" keys="employee_id"
+        visible-columns="first_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-date-input #assignment_date attr="assignment_date" type="timestamp" label="assignment_date" editable="no" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+        
+          <o-table-column #id attr="id" title="id" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="LEAVEBALANCE-employee_id">
+    <div layout-padding>
+      <o-table 
+        attr="LeaveBalanceTable" 
+        service="LeaveBalance" 
+        entity="LeaveBalance" 
+        keys="id"
+        parent-keys="employee_id:id"
+        columns="id;employee_id;sick_leave;vacation_leave"  
+        horizontal-scroll="yes"
+        detail-form-route="LeaveBalance" 
+        edit-form-route="LeaveBalance"
+        visible-columns="id;employee_id;sick_leave;vacation_leave"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="employee_id" title="employee_id">
+    <o-table-cell-renderer-service attr="employee_id" 
+        service="Employee" entity="EmployeeType" columns="id;first_name"
+        parent-keys="id:employee_id"
+        value-column="first_name" keys="employee_id"
+        visible-columns="first_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column #sick_leave attr="sick_leave" title="sick_leave" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+        
+          <o-table-column #vacation_leave attr="vacation_leave" title="vacation_leave" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="OVERTIMERECORD-employee_id">
+    <div layout-padding>
+      <o-table 
+        attr="OvertimeRecordTable" 
+        service="OvertimeRecord" 
+        entity="OvertimeRecord" 
+        keys="id"
+        parent-keys="employee_id:id"
+        columns="id;employee_id;date;hours"  
+        horizontal-scroll="yes"
+        detail-form-route="OvertimeRecord" 
+        edit-form-route="OvertimeRecord"
+        visible-columns="id;employee_id;date;hours"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="employee_id" title="employee_id">
+    <o-table-cell-renderer-service attr="employee_id" 
+        service="Employee" entity="EmployeeType" columns="id;first_name"
+        parent-keys="id:employee_id"
+        value-column="first_name" keys="employee_id"
+        visible-columns="first_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-date-input #date attr="date" type="timestamp" label="date" editable="no" required="yes" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+        
+          <o-table-column #hours attr="hours" title="hours" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="PERFORMANCEREVIEW-employee_id">
+    <div layout-padding>
+      <o-table 
+        attr="PerformanceReviewTable" 
+        service="PerformanceReview" 
+        entity="PerformanceReview" 
+        keys="id"
+        parent-keys="employee_id:id"
+        columns="id;employee_id;review_date;score"  
+        horizontal-scroll="yes"
+        detail-form-route="PerformanceReview" 
+        edit-form-route="PerformanceReview"
+        visible-columns="id;employee_id;review_date;score"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="employee_id" title="employee_id">
+    <o-table-cell-renderer-service attr="employee_id" 
+        service="Employee" entity="EmployeeType" columns="id;first_name"
+        parent-keys="id:employee_id"
+        value-column="first_name" keys="employee_id"
+        visible-columns="first_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-date-input #review_date attr="review_date" type="timestamp" label="review_date" editable="no" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+        
+          <o-table-column #score attr="score" title="score" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="TRAVELRECORD-employee_id">
+    <div layout-padding>
+      <o-table 
+        attr="TravelRecordTable" 
+        service="TravelRecord" 
+        entity="TravelRecord" 
+        keys="id"
+        parent-keys="employee_id:id"
+        columns="id;employee_id;destination;travel_date"  
+        horizontal-scroll="yes"
+        detail-form-route="TravelRecord" 
+        edit-form-route="TravelRecord"
+        visible-columns="id;employee_id;destination;travel_date"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="employee_id" title="employee_id">
+    <o-table-cell-renderer-service attr="employee_id" 
+        service="Employee" entity="EmployeeType" columns="id;first_name"
+        parent-keys="id:employee_id"
+        value-column="first_name" keys="employee_id"
+        visible-columns="first_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column #destination attr="destination" title="destination" editable="no" required="yes" content-align="left"></o-table-column>
+        
+          <o-date-input #travel_date attr="travel_date" type="timestamp" label="travel_date" editable="no" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+      </mat-tab-group>
+      
+    </o-form>
+  </o-form-container>
+</div>

@@ -1,0 +1,536 @@
+about:
+  date: November 08, 2024 05:50:08
+  recent_changes: works with modified safrs-react-admin
+  version: 0.0.0
+api_root: '{http_type}://{swagger_host}:{port}/{api}'
+authentication: '{system-default}'
+info:
+  number_relationships: 18
+  number_tables: 20
+info_toggle_checked: true
+resources:
+  Attendance:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: employee_id
+      required: true
+    - name: date
+      type: DATETIME
+    - name: status
+      required: true
+    description: Tracks daily attendance of employees.
+    info_list: Tracks daily attendance of employees.
+    tab_groups:
+    - direction: toone
+      fks:
+      - employee_id
+      name: employee
+      resource: Employee
+    type: Attendance
+    user_key: id
+  Department:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: id
+    description: Represents a department within the organization.
+    info_list: Represents a department within the organization.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - department_id
+      name: TeamList
+      resource: Team
+    type: Department
+    user_key: name
+  Employee:
+    attributes:
+    - label: ' first_name*'
+      name: first_name
+      required: true
+      search: true
+      sort: true
+    - name: last_name
+      required: true
+    - name: email
+      required: true
+    - name: hire_date
+      type: DATETIME
+    - name: id
+    description: Represents an employee in the organization.
+    info_list: Represents an employee in the organization.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - employee_id
+      name: AttendanceList
+      resource: Attendance
+    - direction: tomany
+      fks:
+      - employee_id
+      name: EmployeeBenefitList
+      resource: EmployeeBenefit
+    - direction: tomany
+      fks:
+      - employee_id
+      name: EmployeeLocationList
+      resource: EmployeeLocation
+    - direction: tomany
+      fks:
+      - employee_id
+      name: EmployeeProjectList
+      resource: EmployeeProject
+    - direction: tomany
+      fks:
+      - employee_id
+      name: EmployeeShiftList
+      resource: EmployeeShift
+    - direction: tomany
+      fks:
+      - employee_id
+      name: EmployeeTeamList
+      resource: EmployeeTeam
+    - direction: tomany
+      fks:
+      - employee_id
+      name: EmployeeTrainingList
+      resource: EmployeeTraining
+    - direction: tomany
+      fks:
+      - employee_id
+      name: EquipmentAssignmentList
+      resource: EquipmentAssignment
+    - direction: tomany
+      fks:
+      - employee_id
+      name: LeaveBalanceList
+      resource: LeaveBalance
+    - direction: tomany
+      fks:
+      - employee_id
+      name: OvertimeRecordList
+      resource: OvertimeRecord
+    - direction: tomany
+      fks:
+      - employee_id
+      name: PerformanceReviewList
+      resource: PerformanceReview
+    - direction: tomany
+      fks:
+      - employee_id
+      name: TravelRecordList
+      resource: TravelRecord
+    type: Employee
+    user_key: first_name
+  EmployeeBenefit:
+    attributes:
+    - label: ' description*'
+      name: description
+      search: true
+      sort: true
+    - name: employee_id
+      required: true
+    - name: benefit_type
+      required: true
+    - name: id
+    description: Stores benefits information for each employee.
+    info_list: Stores benefits information for each employee.
+    tab_groups:
+    - direction: toone
+      fks:
+      - employee_id
+      name: employee
+      resource: Employee
+    type: EmployeeBenefit
+    user_key: description
+  EmployeeLocation:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: employee_id
+      required: true
+    - name: location_id
+      required: true
+    description: Junction table managing employee location assignments.
+    info_list: Junction table managing employee location assignments.
+    tab_groups:
+    - direction: toone
+      fks:
+      - employee_id
+      name: employee
+      resource: Employee
+    - direction: toone
+      fks:
+      - location_id
+      name: location
+      resource: Location
+    type: EmployeeLocation
+    user_key: id
+  EmployeeProject:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: employee_id
+      required: true
+    - name: project_id
+      required: true
+    description: Junction table to manage assignment of employees to projects.
+    info_list: Junction table to manage assignment of employees to projects.
+    tab_groups:
+    - direction: toone
+      fks:
+      - employee_id
+      name: employee
+      resource: Employee
+    - direction: toone
+      fks:
+      - project_id
+      name: project
+      resource: Project
+    type: EmployeeProject
+    user_key: id
+  EmployeeShift:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: employee_id
+      required: true
+    - name: shift_id
+      required: true
+    description: Junction table for assigning employees to shifts.
+    info_list: Junction table for assigning employees to shifts.
+    tab_groups:
+    - direction: toone
+      fks:
+      - employee_id
+      name: employee
+      resource: Employee
+    - direction: toone
+      fks:
+      - shift_id
+      name: shift
+      resource: Shift
+    type: EmployeeShift
+    user_key: id
+  EmployeeTeam:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: employee_id
+      required: true
+    - name: team_id
+      required: true
+    description: Junction table managing the association of employees to teams.
+    info_list: Junction table managing the association of employees to teams.
+    tab_groups:
+    - direction: toone
+      fks:
+      - employee_id
+      name: employee
+      resource: Employee
+    - direction: toone
+      fks:
+      - team_id
+      name: team
+      resource: Team
+    type: EmployeeTeam
+    user_key: id
+  EmployeeTraining:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: employee_id
+      required: true
+    - name: training_program_id
+      required: true
+    description: Junction table for managing employee enrollments in training programs.
+    info_list: Junction table for managing employee enrollments in training programs.
+    tab_groups:
+    - direction: toone
+      fks:
+      - employee_id
+      name: employee
+      resource: Employee
+    - direction: toone
+      fks:
+      - training_program_id
+      name: training_program
+      resource: TrainingProgram
+    type: EmployeeTraining
+    user_key: id
+  EquipmentAssignment:
+    attributes:
+    - label: ' equipment_name*'
+      name: equipment_name
+      required: true
+      search: true
+      sort: true
+    - name: employee_id
+      required: true
+    - name: assignment_date
+      type: DATETIME
+    - name: id
+    description: Tracks equipment assigned to employees.
+    info_list: Tracks equipment assigned to employees.
+    tab_groups:
+    - direction: toone
+      fks:
+      - employee_id
+      name: employee
+      resource: Employee
+    type: EquipmentAssignment
+    user_key: equipment_name
+  Holiday:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: date
+      required: true
+      type: DATETIME
+    - name: id
+    description: Represents holidays that may affect absence records.
+    info_list: Represents holidays that may affect absence records.
+    type: Holiday
+    user_key: name
+  LeaveBalance:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: employee_id
+      required: true
+    - name: sick_leave
+    - name: vacation_leave
+    description: Tracks the leave balance for each employee.
+    info_list: Tracks the leave balance for each employee.
+    tab_groups:
+    - direction: toone
+      fks:
+      - employee_id
+      name: employee
+      resource: Employee
+    type: LeaveBalance
+    user_key: id
+  Location:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: address
+    - name: id
+    description: Represents a location where an employee is based or works.
+    info_list: Represents a location where an employee is based or works.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - location_id
+      name: EmployeeLocationList
+      resource: EmployeeLocation
+    type: Location
+    user_key: name
+  OvertimeRecord:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: employee_id
+      required: true
+    - name: date
+      required: true
+      type: DATETIME
+    - name: hours
+    description: Records details of employee overtime work.
+    info_list: Records details of employee overtime work.
+    tab_groups:
+    - direction: toone
+      fks:
+      - employee_id
+      name: employee
+      resource: Employee
+    type: OvertimeRecord
+    user_key: id
+  PerformanceReview:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: employee_id
+      required: true
+    - name: review_date
+      type: DATETIME
+    - name: score
+    description: Stores records of employee performance reviews.
+    info_list: Stores records of employee performance reviews.
+    tab_groups:
+    - direction: toone
+      fks:
+      - employee_id
+      name: employee
+      resource: Employee
+    type: PerformanceReview
+    user_key: id
+  Project:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: deadline
+      type: DATETIME
+    - name: id
+    description: Represents a project that employees can be assigned to.
+    info_list: Represents a project that employees can be assigned to.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - project_id
+      name: EmployeeProjectList
+      resource: EmployeeProject
+    type: Project
+    user_key: name
+  Shift:
+    attributes:
+    - label: ' shift_name*'
+      name: shift_name
+      required: true
+      search: true
+      sort: true
+    - name: start_time
+      required: true
+      type: DATETIME
+    - name: end_time
+      required: true
+      type: DATETIME
+    - name: id
+    description: Represents different work shifts.
+    info_list: Represents different work shifts.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - shift_id
+      name: EmployeeShiftList
+      resource: EmployeeShift
+    type: Shift
+    user_key: shift_name
+  Team:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: department_id
+      required: true
+    - name: id
+    description: Represents a team within a department.
+    info_list: Represents a team within a department.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - team_id
+      name: EmployeeTeamList
+      resource: EmployeeTeam
+    - direction: toone
+      fks:
+      - department_id
+      name: department
+      resource: Department
+    type: Team
+    user_key: name
+  TrainingProgram:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: description
+    - name: id
+    description: Represents a training program available to employees.
+    info_list: Represents a training program available to employees.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - training_program_id
+      name: EmployeeTrainingList
+      resource: EmployeeTraining
+    type: TrainingProgram
+    user_key: name
+  TravelRecord:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: employee_id
+      required: true
+    - name: destination
+      required: true
+    - name: travel_date
+      type: DATETIME
+    description: Tracks employee travel activities.
+    info_list: Tracks employee travel activities.
+    tab_groups:
+    - direction: toone
+      fks:
+      - employee_id
+      name: employee
+      resource: Employee
+    type: TravelRecord
+    user_key: id
+settings:
+  HomeJS: /admin-app/home.js
+  max_list_columns: 8
+  style_guide:
+    applicationLocales:
+    - en
+    - es
+    currency_symbol: $
+    currency_symbol_position: left
+    date_format: LL
+    decimal_max: '1000000000'
+    decimal_min: '0'
+    decimal_separator: .
+    detail_mode: tab
+    edit_on_mode: dblclick
+    exclude_listpicker: false
+    include_translation: 'false'
+    keycloak_client_id: alsclient
+    keycloak_realm: kcals
+    keycloak_url: http://localhost:8080
+    locale: en
+    max_decimal_digits: '4'
+    min_decimal_digits: '2'
+    new_mode: dialog
+    pick_style: list
+    row_height: small,
+    serviceType: OntimizeEE
+    startSessionPath: /auth/login
+    style: light
+    thousand_separator: ','
+    use_keycloak: 'false'

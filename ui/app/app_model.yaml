@@ -1,0 +1,808 @@
+about:
+  date: November 08, 2024 05:50:08
+  recent_changes: works with modified safrs-react-admin
+  version: 0.0.0
+api_root: '{http_type}://{swagger_host}:{port}/{api}'
+authentication: '{system-default}'
+entities:
+  Attendance:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: employee_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: date
+      type: DATETIME
+    - name: status
+      required: true
+      template: text
+      type: VARCHAR
+    description: Tracks daily attendance of employees.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: Tracks daily attendance of employees.
+    label: Attendance
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - employee_id
+      name: employee
+      resource: Employee
+    type: Attendance
+  Department:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Represents a department within the organization.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    home_template: home_template.html
+    info_list: Represents a department within the organization.
+    label: Department
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - department_id
+      name: TeamList
+      resource: Team
+    type: Department
+  Employee:
+    columns:
+    - label: ' first_name*'
+      name: first_name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: last_name
+      required: true
+      template: text
+      type: VARCHAR
+    - name: email
+      required: true
+      template: text
+      type: VARCHAR
+    - name: hire_date
+      type: DATETIME
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Represents an employee in the organization.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: first_name
+    home_template: home_template.html
+    info_list: Represents an employee in the organization.
+    label: Employee
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - employee_id
+      name: AttendanceList
+      resource: Attendance
+    - direction: tomany
+      fks:
+      - employee_id
+      name: EmployeeBenefitList
+      resource: EmployeeBenefit
+    - direction: tomany
+      fks:
+      - employee_id
+      name: EmployeeLocationList
+      resource: EmployeeLocation
+    - direction: tomany
+      fks:
+      - employee_id
+      name: EmployeeProjectList
+      resource: EmployeeProject
+    - direction: tomany
+      fks:
+      - employee_id
+      name: EmployeeShiftList
+      resource: EmployeeShift
+    - direction: tomany
+      fks:
+      - employee_id
+      name: EmployeeTeamList
+      resource: EmployeeTeam
+    - direction: tomany
+      fks:
+      - employee_id
+      name: EmployeeTrainingList
+      resource: EmployeeTraining
+    - direction: tomany
+      fks:
+      - employee_id
+      name: EquipmentAssignmentList
+      resource: EquipmentAssignment
+    - direction: tomany
+      fks:
+      - employee_id
+      name: LeaveBalanceList
+      resource: LeaveBalance
+    - direction: tomany
+      fks:
+      - employee_id
+      name: OvertimeRecordList
+      resource: OvertimeRecord
+    - direction: tomany
+      fks:
+      - employee_id
+      name: PerformanceReviewList
+      resource: PerformanceReview
+    - direction: tomany
+      fks:
+      - employee_id
+      name: TravelRecordList
+      resource: TravelRecord
+    type: Employee
+  EmployeeBenefit:
+    columns:
+    - label: ' description*'
+      name: description
+      search: true
+      sort: true
+      template: text
+      type: TEXT
+    - name: employee_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: benefit_type
+      required: true
+      template: text
+      type: VARCHAR
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Stores benefits information for each employee.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: description
+    home_template: home_template.html
+    info_list: Stores benefits information for each employee.
+    label: EmployeeBenefit
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - employee_id
+      name: employee
+      resource: Employee
+    type: EmployeeBenefit
+  EmployeeLocation:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: employee_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: location_id
+      required: true
+      template: integer
+      type: INTEGER
+    description: Junction table managing employee location assignments.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: Junction table managing employee location assignments.
+    label: EmployeeLocation
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - employee_id
+      name: employee
+      resource: Employee
+    - direction: toone
+      fks:
+      - location_id
+      name: location
+      resource: Location
+    type: EmployeeLocation
+  EmployeeProject:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: employee_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: project_id
+      required: true
+      template: integer
+      type: INTEGER
+    description: Junction table to manage assignment of employees to projects.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: Junction table to manage assignment of employees to projects.
+    label: EmployeeProject
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - employee_id
+      name: employee
+      resource: Employee
+    - direction: toone
+      fks:
+      - project_id
+      name: project
+      resource: Project
+    type: EmployeeProject
+  EmployeeShift:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: employee_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: shift_id
+      required: true
+      template: integer
+      type: INTEGER
+    description: Junction table for assigning employees to shifts.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: Junction table for assigning employees to shifts.
+    label: EmployeeShift
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - employee_id
+      name: employee
+      resource: Employee
+    - direction: toone
+      fks:
+      - shift_id
+      name: shift
+      resource: Shift
+    type: EmployeeShift
+  EmployeeTeam:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: employee_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: team_id
+      required: true
+      template: integer
+      type: INTEGER
+    description: Junction table managing the association of employees to teams.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: Junction table managing the association of employees to teams.
+    label: EmployeeTeam
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - employee_id
+      name: employee
+      resource: Employee
+    - direction: toone
+      fks:
+      - team_id
+      name: team
+      resource: Team
+    type: EmployeeTeam
+  EmployeeTraining:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: employee_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: training_program_id
+      required: true
+      template: integer
+      type: INTEGER
+    description: Junction table for managing employee enrollments in training programs.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: Junction table for managing employee enrollments in training programs.
+    label: EmployeeTraining
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - employee_id
+      name: employee
+      resource: Employee
+    - direction: toone
+      fks:
+      - training_program_id
+      name: training_program
+      resource: TrainingProgram
+    type: EmployeeTraining
+  EquipmentAssignment:
+    columns:
+    - label: ' equipment_name*'
+      name: equipment_name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: employee_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: assignment_date
+      type: DATETIME
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Tracks equipment assigned to employees.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: equipment_name
+    home_template: home_template.html
+    info_list: Tracks equipment assigned to employees.
+    label: EquipmentAssignment
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - employee_id
+      name: employee
+      resource: Employee
+    type: EquipmentAssignment
+  Holiday:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: date
+      required: true
+      type: DATETIME
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Represents holidays that may affect absence records.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    home_template: home_template.html
+    info_list: Represents holidays that may affect absence records.
+    label: Holiday
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    type: Holiday
+  LeaveBalance:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: employee_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: sick_leave
+      template: real
+      type: FLOAT
+    - name: vacation_leave
+      template: real
+      type: FLOAT
+    description: Tracks the leave balance for each employee.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: Tracks the leave balance for each employee.
+    label: LeaveBalance
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - employee_id
+      name: employee
+      resource: Employee
+    type: LeaveBalance
+  Location:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: address
+      template: text
+      type: TEXT
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Represents a location where an employee is based or works.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    home_template: home_template.html
+    info_list: Represents a location where an employee is based or works.
+    label: Location
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - location_id
+      name: EmployeeLocationList
+      resource: EmployeeLocation
+    type: Location
+  OvertimeRecord:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: employee_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: date
+      required: true
+      type: DATETIME
+    - name: hours
+      template: real
+      type: FLOAT
+    description: Records details of employee overtime work.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: Records details of employee overtime work.
+    label: OvertimeRecord
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - employee_id
+      name: employee
+      resource: Employee
+    type: OvertimeRecord
+  PerformanceReview:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: employee_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: review_date
+      type: DATETIME
+    - name: score
+      template: real
+      type: FLOAT
+    description: Stores records of employee performance reviews.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: Stores records of employee performance reviews.
+    label: PerformanceReview
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - employee_id
+      name: employee
+      resource: Employee
+    type: PerformanceReview
+  Project:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: deadline
+      type: DATETIME
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Represents a project that employees can be assigned to.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    home_template: home_template.html
+    info_list: Represents a project that employees can be assigned to.
+    label: Project
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - project_id
+      name: EmployeeProjectList
+      resource: EmployeeProject
+    type: Project
+  Shift:
+    columns:
+    - label: ' shift_name*'
+      name: shift_name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: start_time
+      required: true
+      type: DATETIME
+    - name: end_time
+      required: true
+      type: DATETIME
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Represents different work shifts.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: shift_name
+    home_template: home_template.html
+    info_list: Represents different work shifts.
+    label: Shift
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - shift_id
+      name: EmployeeShiftList
+      resource: EmployeeShift
+    type: Shift
+  Team:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: department_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Represents a team within a department.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    home_template: home_template.html
+    info_list: Represents a team within a department.
+    label: Team
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - team_id
+      name: EmployeeTeamList
+      resource: EmployeeTeam
+    - direction: toone
+      fks:
+      - department_id
+      name: department
+      resource: Department
+    type: Team
+  TrainingProgram:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: description
+      template: text
+      type: TEXT
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Represents a training program available to employees.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    home_template: home_template.html
+    info_list: Represents a training program available to employees.
+    label: TrainingProgram
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - training_program_id
+      name: EmployeeTrainingList
+      resource: EmployeeTraining
+    type: TrainingProgram
+  TravelRecord:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: employee_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: destination
+      required: true
+      template: text
+      type: VARCHAR
+    - name: travel_date
+      type: DATETIME
+    description: Tracks employee travel activities.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: Tracks employee travel activities.
+    label: TravelRecord
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - employee_id
+      name: employee
+      resource: Employee
+    type: TravelRecord
+settings:
+  HomeJS: /admin-app/home.js
+  max_list_columns: 8
+  style_guide:
+    applicationLocales:
+    - en
+    - es
+    currency_symbol: $
+    currency_symbol_position: left
+    date_format: LL
+    decimal_max: '1000000000'
+    decimal_min: '0'
+    decimal_separator: .
+    edit_on_mode: dblclick
+    exclude_listpicker: false
+    include_translation: false
+    keycloak_client_id: alsclient
+    keycloak_realm: kcals
+    keycloak_url: http://localhost:8080
+    locale: en
+    max_decimal_digits: '4'
+    min_decimal_digits: '2'
+    mode: tab
+    pick_style: list
+    serviceType: OntimizeEE
+    startSessionPath: /auth/login
+    style: light
+    thousand_separator: ','
+    use_keycloak: false

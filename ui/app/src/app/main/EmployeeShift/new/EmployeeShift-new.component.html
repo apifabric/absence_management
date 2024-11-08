@@ -1,0 +1,54 @@
+<o-form #EmployeeShiftForm attr="EmployeeShift_form_insert" service="EmployeeShift" entity="EmployeeShift" 
+keys="id" fxLayout="column" show-header="yes" header-actions="I"
+horizontal-scroll="yes"
+after-insert-mode="new" class="standalone-form-container" (onInsertMode)="onInsertMode()">
+
+<o-row attr="row1" layout-align="start stretch">
+  <div fxLayout="row wrap" fxLayoutAlign="start start" fxFlex fxLayoutGap="14px">
+    
+        <o-integer-input #id attr="id" label=" id*" type="integer" editable="no" required="no" ></o-integer-input>
+      
+        <o-list-picker 
+        attr="employee_id"
+        service="Employee" 
+        entity="EmployeeType"
+        fxFlex="30" 
+        query-on-init="no" 
+        query-on-bind="yes" 
+        required="yes" 
+        enabled="yes" 
+        filter="yes"
+        value-column="id" 
+        value-column-type="INTEGER"  
+        keys="id" 
+        columns="id;employee_id;first_name" 
+        title="employee_id"
+        visible-columns="id;first_name" 
+        separator=" - " width="680px" class="form-field">
+</o-list-picker>
+      
+        <o-list-picker 
+        attr="shift_id"
+        service="Shift" 
+        entity="ShiftType"
+        fxFlex="30" 
+        query-on-init="no" 
+        query-on-bind="yes" 
+        required="yes" 
+        enabled="yes" 
+        filter="yes"
+        value-column="id" 
+        value-column-type="INTEGER"  
+        keys="id" 
+        columns="id;shift_id;shift_name" 
+        title="shift_id"
+        visible-columns="id;shift_name" 
+        separator=" - " width="680px" class="form-field">
+</o-list-picker>
+      
+</div>
+</o-row>
+
+<div layout-padding></div>
+
+</o-form>
